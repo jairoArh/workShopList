@@ -71,6 +71,12 @@ public class LinkedList <T>{
     }
 
     public Node<T> findNode( T node ){
+        Node<T> aux = head;
+        while( aux != null ){
+            if( comparator.compare(aux.getInfo(),node) == 0){
+                return aux;
+            }
+        }
 
         return null;
     }
