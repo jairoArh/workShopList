@@ -1,6 +1,7 @@
 package run;
 
 import logic.CircledList;
+import logic.Digit;
 import logic.StackNode;
 
 import java.util.Scanner;
@@ -26,21 +27,18 @@ public class Main {
     }
 
     private void listCircled() {
-        CircledList<Character> list = new CircledList<>((o1,o2)->Character.compare(o1,o2));
-        list.addNodeFirst('J');
-        list.addNodeFirst('A');
-        list.addNodeFirst('I');
-        list.addNodeFirst('R');
-        list.addNodeFirst('O');
+        CircledList<Digit> list = new CircledList<>((o1, o2)->Integer.compare(o1.getDigit(),o2.getDigit()));
 
-        System.out.println( list.findNode('J').getInfo());
-        System.out.println( list.findNode('A').getInfo());
-        System.out.println( list.findNode('I').getInfo());
-        System.out.println( list.findNode('R').getInfo());
-        System.out.println( list.findNode('O').getInfo());
+       list.addNodeLast(new Digit(2));
+        list.addNodeLast(new Digit(6));
+        list.addNodeFirst(new Digit(3));
+        list.addNodeLast(new Digit(1));
+        list.addNodeLast(new Digit(9));
+        list.addNodeFirst(new Digit(5));
+        list.addNodeFirst(new Digit(8));
 
+        list.getLinkedList().forEach( d -> System.out.printf( "%d\t",d.getDigit()));
 
-        System.out.println(list.getLinkedList());
-        System.out.println(list.getLinkedList( list.findNode('J')));
+        System.out.println("---" + list.jumpList(list.findNode( new Digit(5)),11).getInfo().getDigit());
     }
 }

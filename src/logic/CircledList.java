@@ -29,6 +29,27 @@ public class CircledList <T>{
         }
     }
 
+    public void addNodeLast(T info){
+        if( isEmpty()){
+            head = new Node<>(info);
+            head.setNext( head );
+        }else{
+            Node<T> nodeNew = new Node<>(info);
+            nodeNew.setNext( head.getNext());
+            head.setNext( nodeNew );
+            head = nodeNew;
+        }
+    }
+
+    public Node<T> jumpList(Node<T> node,int jumps){
+        List<T> list = new ArrayList<>();
+        for( int cont = 1 ; cont <= jumps ; cont++ ){
+            node = node.getNext();
+        }
+
+        return node;
+    }
+
     public List<T> getLinkedList(){
         ArrayList<T> list = new ArrayList<>();
 

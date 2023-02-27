@@ -21,7 +21,22 @@ public class BinaryTree <T>{
     }
 
     public void addNode( T info ){
-
+        if( isEmpty() ){
+            root = new TreeNode<>(info);
+        }else{
+            TreeNode<T> nodeNew = new TreeNode<>(info);
+            TreeNode<T> act = root;
+            TreeNode<T> ant = null;
+            while( act != null ){
+                ant = act;
+                act = comparator.compare(info,act.getInfo()) < 0 ? act.getLeft() : act.getRight();
+            }
+            if( comparator.compare(info,ant.getInfo())<0){
+                ant.setLeft( nodeNew );
+            }else{
+                ant.setRight( nodeNew );
+            }
+        }
     }
 
     public List<T> listPresort(){
@@ -32,17 +47,24 @@ public class BinaryTree <T>{
 
     private void presort(TreeNode<T> node) {
         if( node != null ){
-            list.add( node.getInfo());
+            list.add( node.getInfo()); //Procesar Nodo
             presort( node.getLeft());
             presort( node.getRight());
         }
     }
 
     public List<T> listInsort(){
-        return null;
+        list = new ArrayList<>();
+        insort( root );
+        return list;
     }
 
     private void insort(TreeNode<T> node){
+        if( node != null ){
+            insort( node.getLeft());
+            list.add( node.getInfo()); //Procesar Nodo
+            insort( node.getRight());
+        }
 
     }
 
@@ -82,7 +104,7 @@ public class BinaryTree <T>{
         return null;
     }
 
-    public boolean isLeaf(){
+    public boolean isLeaf(TreeNode<T> node){
         return false;
     }
 
